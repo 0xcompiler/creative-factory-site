@@ -1,0 +1,21 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Creative Factory Publisher</title><link rel="stylesheet" href="app.css"></head><body>
+<h1>Creative Factory Publisher</h1>
+<p class="sub">Send the videos you made to your own TikTok accounts. You finish and post each one in the TikTok app.</p>
+<p class="muted" id="conn">Checking connector...</p>
+
+<h2>1. TikTok accounts</h2>
+<div class="card"><div id="accounts" class="muted">No account connected yet.</div>
+<div class="row" style="margin-top:12px"><button id="connect">Connect a TikTok account</button>
+<span class="muted">Permissions requested: basic profile info (user.info.basic) and upload to your TikTok inbox (video.upload).</span></div></div>
+
+<h2>2. Choose a video</h2>
+<div class="card"><div id="videos" class="row muted">Loading videos...</div></div>
+
+<h2>3. Send to TikTok</h2>
+<div class="card">
+<div class="row"><label>Account: <select id="acc"></select></label><button id="send" disabled>Send to TikTok inbox</button></div>
+<p class="muted">The video goes to your TikTok inbox as a draft. Nothing is posted publicly by this tool: you open the notification in the TikTok app, write the caption, turn on the "AI-generated content" label and choose who can see it.</p>
+<div id="log"></div></div>
+
+<p class="muted" style="margin-top:32px"><a href="index.html" style="color:#ffb440">Home</a> · <a href="privacy.html" style="color:#ffb440">Privacy</a> · <a href="terms.html" style="color:#ffb440">Terms</a></p>
+<script src="app.js"></script></body></html>

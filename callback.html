@@ -1,8 +1,12 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Connected - Creative Factory</title>
-<style>body{font-family:Georgia,serif;max-width:720px;margin:40px auto;padding:0 20px;background:#0d0d10;color:#e1d7c8;line-height:1.6}h1{color:#ffb440}code{display:block;word-break:break-all;background:#1c1c22;padding:12px;margin:12px 0}</style></head><body>
-<h1>Account connection</h1><p id="msg">Reading response...</p><code id="code"></code>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Connecting - Creative Factory</title><link rel="stylesheet" href="app.css"></head><body>
+<h1>Creative Factory Publisher</h1><p id="msg" class="muted">Finishing the connection...</p><code id="code" style="word-break:break-all"></code>
 <script>
-var p=new URLSearchParams(location.search);
-if(p.get('code')){document.getElementById('msg').textContent='Connected. Copy this full address back to Creative Factory:';document.getElementById('code').textContent=location.href;}
-else{document.getElementById('msg').textContent='Connection failed: '+(p.get('error_description')||p.get('error')||'no code received');}
+var p=new URLSearchParams(location.search),m=document.getElementById('msg');
+var st=sessionStorage.getItem('cf_state');
+if(!p.get('code')){m.textContent='Connection failed: '+(p.get('error_description')||p.get('error')||'no code received');m.className='err'}
+else if(st&&p.get('state')!==st){m.textContent='Connection failed: state mismatch';m.className='err'}
+else fetch('http://127.0.0.1:8765/api/tiktok/connect',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({url:location.href})})
+ .then(function(r){return r.json().then(function(b){if(!r.ok)throw new Error(b.detail);return b})})
+ .then(function(b){m.textContent='Connected: '+b.account+'. Going back...';m.className='ok';setTimeout(function(){location.href='app.html'},1800)})
+ .catch(function(e){m.textContent='Could not reach the connector ('+e.message+'). Copy this address into Creative Factory:';document.getElementById('code').textContent=location.href});
 </script></body></html>
