@@ -1,0 +1,8 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Connected - Creative Factory</title>
+<style>body{font-family:Georgia,serif;max-width:720px;margin:40px auto;padding:0 20px;background:#0d0d10;color:#e1d7c8;line-height:1.6}h1{color:#ffb440}code{display:block;word-break:break-all;background:#1c1c22;padding:12px;margin:12px 0}</style></head><body>
+<h1>Account connection</h1><p id="msg">Reading response...</p><code id="code"></code>
+<script>
+var p=new URLSearchParams(location.search);
+if(p.get('code')){document.getElementById('msg').textContent='Connected. Copy this full address back to Creative Factory:';document.getElementById('code').textContent=location.href;}
+else{document.getElementById('msg').textContent='Connection failed: '+(p.get('error_description')||p.get('error')||'no code received');}
+</script></body></html>
